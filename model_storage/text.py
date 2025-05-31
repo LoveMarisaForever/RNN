@@ -8,7 +8,7 @@ else:
     device = torch.device("cpu")
     print("Using CPU")
 
-# 在后续代码中使用 device
-# 例如：
-# classifier = classifier.to(device)
-# dataset.class_weights = dataset.class_weights.to(device)
+
+print(torch.cuda.is_available())  # 应输出True
+print(torch.cuda.device_count())   # 应输出GPU数量（至少1）
+print(torch.cuda.get_device_name(0))  # 显示GPU名称
