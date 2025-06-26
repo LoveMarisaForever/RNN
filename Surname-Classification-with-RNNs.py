@@ -791,14 +791,6 @@ train_state['test_acc'] = running_acc
 
 print(f"Test Loss: {train_state['test_loss']:.4f}")
 print(f"Test Accuracy: {train_state['test_acc']:.2f}%")
-
-# 推理验证
-surnames = ["McMahan", "Nakamoto", "Wan", "Cho"]
-for surname in surnames:
-    result = predict_nationality(surname, classifier, vectorizer)
-    print(f"Surname: {result['surname']}, Predicted Nationality: {result['nationality']}, Probability: {result['probability']:.4f}")
-
-
 def predict_nationality(surname, classifier, vectorizer):
     vectorized_surname, vec_length = vectorizer.vectorize(surname)
     vectorized_surname = torch.tensor(vectorized_surname).unsqueeze(dim=0).to(args.device)
@@ -813,3 +805,10 @@ def predict_nationality(surname, classifier, vectorizer):
     predicted_nationality = vectorizer.nationality_vocab.lookup_index(index)
 
     return {'nationality': predicted_nationality, 'probability': prob_value, 'surname': surname}
+# 推理验证
+surnames = ["McMahan", "Nakamoto", "Wan", "Cho"]
+for surname in surnames:
+    result = predict_nationality(surname, classifier, vectorizer)
+    print(f"Surname: {result['surname']}, Predicted Nationality: {result['nationality']}, Probability: {result['probability']:.4f}")
+
+
